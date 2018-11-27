@@ -554,8 +554,8 @@ function show_cc_Shops(){
         cc_featureLayer = L.mapbox.featureLayer(cc_filteredFeatures, {
             pointToLayer: function(feature,latlng){
                 return L.circle(latlng, 5, {
-                            color: 'red',
-                            fillColor: '#f03',
+                            color: '#fc8600',
+                            fillColor: '#fc8600',
                             fillOpacity: 0.5 
                         })
                 .bindPopup(
