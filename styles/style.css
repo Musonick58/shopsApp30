@@ -5,6 +5,17 @@ html, body
     margin: 0px;
 }
 
+@font-face {
+    font-family: 'Gilroy';
+    src: url(../font/Gilroy-Regular.eot);
+    src: url(../font/Gilroy-Regular.eot#iefix) format('embedded-opentype'),
+        url(../font/Gilroy-Regular.woff2) format('woff2'),
+        url(../font/Gilroy-Regular.woff) format('woff'),
+        url(../font/Gilroy-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 .scrollable-menu {
     height: auto;
     max-height: 200px;

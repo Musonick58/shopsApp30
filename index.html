@@ -26,6 +26,12 @@
         <script src="scripts/icons.js"></script>
         <script src="scripts/styles.js"></script>
         <script src="scripts/libraries/geostats.min.js"></script>
+
+        <link href= 'assets/font/Gilroy-Regular.eot' rel='stylesheet' type='text/css'>
+        <link href= 'assets/font/Gilroy-Regular.woff2' rel='stylesheet' type='text/css'>
+        <link href= 'assets/font/Gilroy-Regular.woff' rel='stylesheet' type='text/css'>
+        <link href= 'assets/font/Gilroy-Regular.ttf' rel='stylesheet' type='text/css'>
+        
         
         <link rel="stylesheet" href="css/normalize.css" />
         <link rel="stylesheet" href="css/ion.rangeSlider.css" />
@@ -209,14 +215,48 @@
 
                             <!-- Gonna put a search bar here-->
                             <li class="searchbar" id="search">
-                                <ul class="form" style="padding:8px">
+                                <ul class="form" style="padding:12px">
                                   <form id='search'>
-                                      <li><input type="text" name='search' value="" style="background-color: transparent; border-color: transparent; border-bottom-color: #777; outline: none;">&nbsp;</li>
+                                      <input type="text" name='search' value="Search" style="background-color: transparent; border-color: transparent; border-bottom-color: #777; outline: none;">&nbsp;
                                     </form>
                                 </ul>
                               </li>
-                           
 
+                             <!-- Pause-->
+                             <li class="rewind" id="rew">
+                                    <ul class="button" style="padding:12px; background-color:transparent; color: transparent">
+                                      <button id='search' style="background-color: transparent; border-color: transparent">
+                                          <input type="image" src="assets/music-player-play-reverse.png" width="20px" name='pause' style="background-color: transparent; outline: none;">&nbsp;
+                                      </button>
+                                    </ul>
+                                  </li>
+
+                            <!-- Pause-->
+                            <li class="pausebutton" id="pause">
+                                    <ul class="button" style="padding:12px; background-color:transparent; color: transparent">
+                                      <button id='search' style="background-color: transparent; border-color: transparent">
+                                          <input type="image" src="assets/pause-symbol.png" width="20px" name='rew' style="background-color: transparent; outline: none;">&nbsp;
+                                      </button>
+                                    </ul>
+                                  </li>
+
+                             <!-- Play-->
+                             <li class="playbutton" id="play">
+                                    <ul class="button" style="padding:12px; background-color:transparent; color: transparent">
+                                      <button id='search' style="background-color: transparent; border-color: transparent">
+                                          <input type="image" src="assets/music-player-play.png" width="20px" name='play' style="background-color: transparent; outline: none;">&nbsp;
+                                      </button>
+                                    </ul>
+                                  </li>
+                                  
+                                 
+                             <li class="burger" id="burg" style="align-self: right">
+                                    <ul class="button" style="padding:12px; background-color:transparent; color: transparent; align-self:right">
+                                      <button id='search' style="background-color: transparent; border-color: transparent">
+                                          <input type="image" src="assets/menu.png" width="20px" name='play' style="background-color: transparent; outline: none;">&nbsp;
+                                      </button>
+                                    </ul>
+                                  </li>
                         </ul>
                     </div>    
                 </div> 

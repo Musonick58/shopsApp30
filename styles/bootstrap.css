@@ -4,6 +4,19 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url(../font/Gilroy-Regular.eot);
+  src: url(../font/Gilroy-Regular.eot#iefix) format('embedded-opentype'),
+      url(../font/Gilroy-Regular.woff2) format('woff2'),
+      url(../font/Gilroy-Regular.woff) format('woff'),
+      url(../font/Gilroy-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -59,6 +72,22 @@ strong {
 dfn {
   font-style: italic;
 }
+
+/*!
+Do up a search bar
+*/
+
+
+.searchbar .form  > a:hover {
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom-color: white;
+  outline: none;
+}
+
+
+
+
 h1 {
   margin: .67em 0;
   font-size: 2em;
@@ -4172,6 +4201,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
+
 @media (min-width: 768px) {
   .navbar {
     border-radius: 4px;
