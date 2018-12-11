@@ -214,49 +214,46 @@
                             </li>
 
                             <!-- Gonna put a search bar here-->
-                            <li class="searchbar" id="search">
+                            <li class="searchbar" id="searchbar">
                                 <ul class="form" style="padding:12px">
-                                  <form id='search'>
-                                      <input type="text" name='search' value="Search" style="background-color: transparent; border-color: transparent; border-bottom-color: #777; outline: none;">&nbsp;
-                                    </form>
+                                  <form id='searchonce'>
+                                      <input type="text" id = 'search' name='searchbox' value="Search" style="background-color: transparent; border-color: transparent; border-bottom-color: #777; outline: none;">&nbsp;
+                                  </form>
                                 </ul>
                               </li>
 
-                             <!-- Pause-->
+                                <!-- search-->
+                             <li class="sbutton" id="sbutton">
+                                    <ul class="button" style="padding:12px; background-color:transparent; color: transparent">
+                                      <button id='sebutton'  style="background-color: transparent; border-color: transparent" onclick='show_cc_Shops();'>
+                                          <input type="image" src="assets/searchicon.png" width="20px" name='searchbutton' style="background-color: transparent; outline: none;">&nbsp;
+                                      </button>
+                                    </ul>
+                                  </li>
+
+
+                             <!-- rewind-->
                              <li class="rewind" id="rew">
                                     <ul class="button" style="padding:12px; background-color:transparent; color: transparent">
-                                      <button id='search' style="background-color: transparent; border-color: transparent">
+                                      <button id='rewind' style="background-color: transparent; border-color: transparent" onclick = 'animateBackward();'>
                                           <input type="image" src="assets/music-player-play-reverse.png" width="20px" name='pause' style="background-color: transparent; outline: none;">&nbsp;
                                       </button>
                                     </ul>
                                   </li>
 
-                            <!-- Pause-->
-                            <li class="pausebutton" id="pause">
-                                    <ul class="button" style="padding:12px; background-color:transparent; color: transparent">
-                                      <button id='search' style="background-color: transparent; border-color: transparent">
-                                          <input type="image" src="assets/pause-symbol.png" width="20px" name='rew' style="background-color: transparent; outline: none;">&nbsp;
-                                      </button>
-                                    </ul>
-                                  </li>
+                          
 
                              <!-- Play-->
                              <li class="playbutton" id="play">
                                     <ul class="button" style="padding:12px; background-color:transparent; color: transparent">
-                                      <button id='search' style="background-color: transparent; border-color: transparent">
+                                      <button id='play' style="background-color: transparent; border-color: transparent" onclick='animateForward();'>
                                           <input type="image" src="assets/music-player-play.png" width="20px" name='play' style="background-color: transparent; outline: none;">&nbsp;
                                       </button>
                                     </ul>
                                   </li>
                                   
                                  
-                             <li class="burger" id="burg" style="align-self: right">
-                                    <ul class="button" style="padding:12px; background-color:transparent; color: transparent; align-self:right">
-                                      <button id='search' style="background-color: transparent; border-color: transparent">
-                                          <input type="image" src="assets/menu.png" width="20px" name='play' style="background-color: transparent; outline: none;">&nbsp;
-                                      </button>
-                                    </ul>
-                                  </li>
+                           
                         </ul>
                     </div>    
                 </div> 
@@ -266,7 +263,9 @@
         <!--Map Goes Here-->
         <div id="map" style="style.css">
         </div>
-    
+
+       
+        
         <div id="overlay" style = "style.css">
             <div id="inner"></div>
         </div>

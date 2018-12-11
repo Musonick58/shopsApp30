@@ -32,8 +32,8 @@ $(function () {
         hide_min_max: true,
         keyboard: true,
         min: 1900,
-        max: 2015,
-        from: 2015,
+        max: 2018,
+        from: 2018,
         step: 1,
         grid: true,
         onLoad: saveResult,
@@ -57,13 +57,35 @@ var map = L.mapbox.map('map', null, { zoomControl:false }).setView([45.4375, 12.
 
 //*********************************************************************************************
 // This section is for placing a marker on the users location
-map.locate({setView: false, maxZoom: 18});
+//map.locate({setView: false, maxZoom: 18});
 
 // create a global var for the location layer
 var locationLayer = L.layerGroup().addTo(map); 
 
+function animateForward(){
+    
+    if(sliderVal < 2018){
+        sliderVal = sliderVal + 10;
+        show_cc_Shops();
+    }
+  
+    
+}
+
+function animateBackward(){
+    
+   
+    if(sliderVal > 1900){
+        sliderVal = sliderVal - 10;
+        show_cc_Shops();
+    }
+   
+
+}
+
 // If the user's location has been found, place a marker at that point
 function onLocationFound(e) {
+     /*
     console.log("You found me!");
     var radius = e.accuracy / 2;
 
@@ -71,7 +93,8 @@ function onLocationFound(e) {
     var locationMarker =  L.marker(e.latlng);
         //.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-    // Create an additional circle showing the approximate radius
+   
+        // Create an additional circle showing the approximate radius
     var locationRadius = L.circle(e.latlng, radius, {
         color: 'blue',
         fillColor: 'steelblue',
@@ -82,6 +105,7 @@ function onLocationFound(e) {
     locationLayer.addLayer(locationMarker);
     locationLayer.addLayer(locationRadius);
     locationMarker.bindPopup("<center><b>You are here!</b><br>Within " + radius + " meters </center>");//.openPopup();
+*/
 }
 
 // Set a listner on the map that calls onLocationFound when the user's location has been found
@@ -423,7 +447,11 @@ function showShops() {
     //getIcon(feature.properties['2015'].nace_plus_descr)
     featureLayer = L.mapbox.featureLayer(filteredFeatures, {
                 pointToLayer: function(feature,latlng){
-                    return new L.marker(latlng, {icon: getIcon(feature.properties['2015'].nace_plus_descr) }).bindPopup(
+                    return new L.circle(latlng, 5, {
+                        color: '#ff0000  ',
+                        fillColor: '#ff0000   ',
+                        fillOpacity: 0.5 
+                    }).bindPopup(
                         "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url_small + "\"/>" + 
                         "<br/> Name: " + feature.properties['2015'].name + 
                         "<br/> Address: " + feature.properties['2015'].address_number + 
@@ -436,6 +464,21 @@ function showShops() {
                         "<br/> Tables of four: " + feature.properties['2015'].plateatici_seats_4 + 
                         "<br/> Notes: " + feature.properties['2015'].notes +
                         "<br/> ck_id: " + feature.id);
+                    /* 
+                    L.marker(latlng, {icon: getIcon(feature.properties['2015'].nace_plus_descr) }).bindPopup(
+                        "<img style=\"width:100%\" src=\"" + feature.properties['2015'].picture_url_small + "\"/>" + 
+                        "<br/> Name: " + feature.properties['2015'].name + 
+                        "<br/> Address: " + feature.properties['2015'].address_number + 
+                        " " + feature.properties['2015'].address_street +  
+                        "<br/> Nace+ Code: " + feature.properties['2015'].nace_plus_code + 
+                        "<br/> Good Sold: " + feature.properties['2015'].nace_plus_descr + 
+                        "<br/> Store Type: " + feature.properties['2015'].shop_type + 
+                        "<br/> Plateaici: " + feature.properties['2015'].plateatici + 
+                        "<br/> Tables of two: " + feature.properties['2015'].plateatici_seats_2 +
+                        "<br/> Tables of four: " + feature.properties['2015'].plateatici_seats_4 + 
+                        "<br/> Notes: " + feature.properties['2015'].notes +
+                        "<br/> ck_id: " + feature.id);
+                        */
                 }
 
             }).addTo(map);
@@ -477,6 +520,14 @@ $.ajax({
         }
 });
 
+/*
+document.getElementById("sebutton").addEventListener("click", function(){
+    list_check_name = document.getElementById('search').value;
+    show_cc_Shops();
+    console.log("yeyeyeyeyey");
+    console.log(document.getElementById('search').value);
+});
+*/
 
 
 //This method is where the actual filtering occurs
@@ -491,6 +542,7 @@ function show_cc_Shops(){
         var list_check_ethnic = [];
         var list_check_pc = [];
         var list_check_code = [];
+        var list_check_name = ""
         
         console.log("Okay onto filtration!");
         console.log("********");
@@ -505,6 +557,13 @@ function show_cc_Shops(){
         for (var i = 0; i < filters_check_code.length; i++) {
             if (filters_check_code[i].checked) list_check_code.push(filters_check_code[i].value);
         }
+        if(document.getElementById('search').value != "Search"){
+            list_check_name = document.getElementById('search').value;
+            console.log(document.getElementById('search').value);
+        }
+
+      
+        
         
         
         //For the first time since we cant remove a layer that hasnt been added
@@ -520,25 +579,46 @@ function show_cc_Shops(){
                 //If the filter lists are all empty only shops from the given year are displayed
                 if(list_check_ethnic.length == 0 && 
                    list_check_pc.length == 0 &&
-                   list_check_code.length == 0){
+                   list_check_code.length == 0 &&
+                   (document.getElementById('search').value == "Search" || document.getElementById('search').value == "" ||  feature.properties.denominazione.includes(list_check_name.toUpperCase()))
+                   ){
                     return true; 
                 }
                 
                 //Else find the longest list of filters
                 var longest = [];
+               
                 var filters = [list_check_ethnic, list_check_pc, list_check_code];
                 for(var i = 0; i < filters.length; i++){
                     if(filters[i].length > longest.length){
                         longest = filters[i];
                     }
                 }
+/*
+                if(
+                    (document.getElementById('search').value !== "Search" && document.getElementById('search').value !== null) && !(feature.properties.denominazione.includes(list_check_name.toUpperCase())))
+                {
+                     //If one exists return true
+                     console.log(feature.properties.denominazione)
+                     return false;
+
+                }
+                */
                 
                 //And Loop through to remove shops that dont meet the criteria
                 for(index in longest){
-                    if((list_check_ethnic.length == 0 || list_check_ethnic.indexOf(feature.properties.persona_nascita) !== -1) &&                
-                       (list_check_pc.length == 0 || list_check_pc.indexOf(feature.properties.persona_fisica) !== -1) &&
-                       (list_check_code.length == 0 || checkEconomicCode(list_check_code, feature.properties.codici_attivita))){
+                    console.log(feature.properties.denominazione);
+                    if(
+                        (list_check_ethnic.length == 0 || list_check_ethnic.indexOf(feature.properties.persona_nascita) !== -1)
+                     &&                
+                       (list_check_pc.length == 0 || list_check_pc.indexOf(feature.properties.persona_fisica) !== -1)
+                     &&
+                       (list_check_code.length == 0 || checkEconomicCode(list_check_code, feature.properties.codici_attivita)) 
+                     &&
+                       ((document.getElementById('search').value == "Search" || document.getElementById('search').value == null) || feature.properties.denominazione.includes(list_check_name.toUpperCase()))
+                       ){
                             //If one exists return true
+                            console.log(feature.properties.denominazione)
                             return true
                     }
                 }
@@ -550,12 +630,14 @@ function show_cc_Shops(){
             }
         });
         
-        //Place Icons on map
+        //Place Icons on map ORANGE
         cc_featureLayer = L.mapbox.featureLayer(cc_filteredFeatures, {
             pointToLayer: function(feature,latlng){
                 return L.circle(latlng, 5, {
-                            color: '#fc8600',
-                            fillColor: '#fc8600',
+                    //00ff00 
+                    //ffa500
+                            color: '#ffa500 ',
+                            fillColor: '#ffa500 ',
                             fillOpacity: 0.5 
                         })
                 .bindPopup(
