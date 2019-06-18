@@ -1,0 +1,43 @@
+<style>
+  .dark-mode{
+    background-color: black;
+    color: white
+  }
+
+  .header-vpc{
+    z-index: 5;
+    display: grid;
+    grid-template-areas: 'how title vpc';
+    padding-bottom: 20px;
+    padding-top: 20px;
+    line-height: 20px;
+  }
+
+  .text-header-vpc{
+      font-size: 18px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .header-visit-vpc{
+      grid-area: vpc;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: right;
+      margin-right: 15px;
+      color: white;
+  }
+
+  a.header-visit-vpc:hover{
+     color: orange !important;
+  }
+
+  .my_link{
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+  }  
+
+  .my_link:hover{
+    color: #e5b106;
+  } 
+</style>

@@ -214,8 +214,8 @@ function getIslands(path,options){
 }
 
 //Call methods for loading in Islands data
-getIslands('IslesLagoon_single.geojson',{searchInclude: ['Nome_Isola','Numero']});
-getIslands('IslesLagoon_multi.geojson'),{searchInclude: ['Nome_Isola','Numero']};
+getIslands('http://data.cityknowledge.net/api/v1/geojson.json?group_name=IslesLagoon%20single',{searchInclude: ['Nome_Isola','Numero']});
+getIslands('http://data.cityknowledge.net/api/v1/geojson.json?group_name=IslesLagoon%20multi',{searchInclude: ['Nome_Isola','Numero']});
 
 //Partial method, does something important
 function partial(func /*, 0..n args */) {
@@ -365,6 +365,7 @@ $.ajax({
             all_shop_json = response;
             $.ajax({
                 dataType: 'json',
+                // TODO aggiornare link dati
                 url: "https://ckdata.firebaseio.com/groups/MERGE%20Stores%202012.json",
                 success: function(response) {
                     console.log("Im over here!");
@@ -424,20 +425,20 @@ function showShops() {
         //Find the longest list of filters
         var longest = [];
         var filters = [list_dem_filters, list_plat_filters, list_goods_filters];
-        for(var i = 0; i < filters.length; i++){
+        /*for(var i = 0; i < filters.length; i++){
             if(filters[i].length > longest.length){
                 longest = filters[i];
             }
-        }
+        }*/
         
         //Loop through nonsense
-        for(index in longest){
+        /*for(index in longest){*/
             if((list_dem_filters.length == 0 || list_dem_filters.indexOf(feature.properties['2015'].shop_type) !== -1) &&                
                (list_goods_filters.length == 0 || list_goods_filters.indexOf(feature.properties['2015'].nace_plus_descr) !== -1) &&
                (list_plat_filters.length == 0 || list_plat_filters.indexOf(feature.properties['2015'].plateatici) !== -1)){
                     return true
             }
-        }
+        //}
         
         return false;
     });
@@ -499,25 +500,25 @@ var all_cc_shops;
 var cc_shops = {type: "FeatureCollection", features:[]};
 //startLoading();
 $.ajax({
-        dataType: 'json',
-        url: "https://ckdata.firebaseio.com/shops.json",
-        success: function(response) {
-            console.log("We did it :D");
-            console.log(response);
-            finishedLoading();
-            all_cc_shops = response;
-            for(property in all_cc_shops){
-                if(all_cc_shops.hasOwnProperty(property) && all_cc_shops[property].hasOwnProperty('lat') && all_cc_shops[property].hasOwnProperty('lng')){
-                    if(all_cc_shops[property].lat !== null && all_cc_shops[property].lng !== null){
-                        cc_shops.features.push(CKtoGeoJSON(all_cc_shops[property]));    
-                    }  
-                }
-            }
-            
-            console.log("We've made it to the windows!");
-            console.log(cc_shops);
-            show_cc_Shops();
+    dataType: 'json',
+    url: "https://ckdata.firebaseio.com/shops.json",
+    success: function(response) {
+      console.log("We did it :D");
+      console.log(response);
+      finishedLoading();
+      all_cc_shops = response;
+      for(property in all_cc_shops){
+        if(all_cc_shops[property].hasOwnProperty('lat') && all_cc_shops[property].hasOwnProperty('lng')){
+          if(all_cc_shops[property].lat !== null && all_cc_shops[property].lng !== null){
+              cc_shops.features.push(CKtoGeoJSON(all_cc_shops[property]));    
+          }  
         }
+      }
+      
+      console.log("We've made it to the windows!");
+      console.log(cc_shops);
+      show_cc_Shops();
+    }
 });
 
 /*
